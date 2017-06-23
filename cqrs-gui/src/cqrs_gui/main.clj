@@ -57,7 +57,7 @@
               :original-version  version})))
 
 (defn- wrap-error-naïvely [handler]
-       (fn [request]
+  (fn [request]
     (try
       (handler request)
       (catch Throwable e
