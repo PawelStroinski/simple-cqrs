@@ -7,6 +7,8 @@
 
 (defmulti ^:private handle :event)
 
+(defonce ^:private observer (es/register-observer handle))
+
 (defmethod handle :default [_])
 
 (defmethod handle ::ii/created
@@ -34,8 +36,6 @@
 (defmethod handle ::ii/deactivated
   [{:keys [id]}]
   (swap! db dissoc id))
-
-(defonce ^:private observer (es/register-observer handle))
 
 (defmethod rm/query :get-inventory-item-details [{:keys [id]}]
   (@db id))
